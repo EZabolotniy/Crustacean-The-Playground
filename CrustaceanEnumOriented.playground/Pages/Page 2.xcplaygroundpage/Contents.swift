@@ -2,7 +2,7 @@
 //:
 //: Enum-Oriented Programming with Value Types
 import CoreGraphics
-let twoPi = CGFloat(M_PI * 2)
+let twoPi = CGFloat(Double.pi * 2)
 //: A `Diagram` as a recursive enum
 enum Diagram {
   case polygon(corners: [CGPoint])
@@ -13,29 +13,30 @@ enum Diagram {
   case diagrams([Diagram])
 }
 
-extension Diagram: Equatable { }
-func == (lhs: Diagram, rhs: Diagram) -> Bool {
-  switch (lhs, rhs) {
-  case let (.polygon(l), .polygon(r)):
-    return l.count == r.count && !zip(l, r).contains { $0 != $1 }
-    
-  case let (.circle(lCenter, lRadius), .circle(rCenter, rRadius)):
-    return lCenter == rCenter && lRadius == rRadius
-    
-  case let (.rectangle(lBounds), .rectangle(rBounds)):
-    return lBounds == rBounds
-  
-  case let (.scale(lx, ly, lDiagram), .scale(rx, ry, rDiagram)):
-    return lx == rx && ly == ry && lDiagram == rDiagram
+extension Diagram: Equatable {
+  static func == (lhs: Diagram, rhs: Diagram) -> Bool {
+    switch (lhs, rhs) {
+    case let (.polygon(l), .polygon(r)):
+      return l.count == r.count && !zip(l, r).contains { $0 != $1 }
 
-  case let (.translate(lx, ly, lDiagram), .translate(rx, ry, rDiagram)):
-    return lx == rx && ly == ry && lDiagram == rDiagram
-    
-  case let (.diagrams(lDiagrams), .diagrams(rDiagrams)):
-    let (l, r) = (lDiagrams, rDiagrams)
-    return l.count == r.count && !zip(l, r).contains { $0 != $1 }
-    
-  default: return false
+    case let (.circle(lCenter, lRadius), .circle(rCenter, rRadius)):
+      return lCenter == rCenter && lRadius == rRadius
+
+    case let (.rectangle(lBounds), .rectangle(rBounds)):
+      return lBounds == rBounds
+
+    case let (.scale(lx, ly, lDiagram), .scale(rx, ry, rDiagram)):
+      return lx == rx && ly == ry && lDiagram == rDiagram
+
+    case let (.translate(lx, ly, lDiagram), .translate(rx, ry, rDiagram)):
+      return lx == rx && ly == ry && lDiagram == rDiagram
+
+    case let (.diagrams(lDiagrams), .diagrams(rDiagrams)):
+      let (l, r) = (lDiagrams, rDiagrams)
+      return l.count == r.count && !zip(l, r).contains { $0 != $1 }
+
+    default: return false
+    }
   }
 }
 //: ## Extend CGContext

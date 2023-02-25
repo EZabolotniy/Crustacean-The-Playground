@@ -1,6 +1,7 @@
 import CoreGraphics
-let twoPi = CGFloat(M_PI * 2)
-let toRadians = { $0 * CGFloat(M_PI / 180) }
+
+let twoPi = CGFloat(Double.pi * 2)
+let toRadians = { $0 * CGFloat(Double.pi / 180) }
 
 public typealias Point = (x: CGFloat, y: CGFloat)
 

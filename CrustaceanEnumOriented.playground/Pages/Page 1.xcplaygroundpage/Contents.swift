@@ -2,7 +2,7 @@
 //:
 //: Enum-Oriented Programming with Value Types
 import CoreGraphics
-let twoPi = CGFloat(M_PI * 2)
+let twoPi = CGFloat(Double.pi * 2)
 //: A `Diagram` as a recursive enum
 enum Diagram {
   case polygon(corners: [CGPoint])
@@ -35,7 +35,7 @@ extension CGContext {
 //: ## Do some drawing!
 //:
 //: A recursive function responsible for drawing a diagram into a CGContext
-func drawDiagram(_ diagram: Diagram, context: CGContext) -> () {
+func drawDiagram(_ diagram: Diagram, context: CGContext) {
   switch diagram {
   case let .polygon(corners):
     context.drawPath(corners)

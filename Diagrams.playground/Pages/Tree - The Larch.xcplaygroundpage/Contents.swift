@@ -16,7 +16,7 @@ extension Diagram {
       smallTree.rotate(-45).translate(x: 12, y: 200),
       smallTree.rotate(70).translate(x: -18, y: 150),
       smallTree.rotate(-70).translate(x: 22, y: 100)
-      ])
+    ])
   }
 }
 
